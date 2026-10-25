@@ -1,7 +1,7 @@
 # Strategy
 
 What the marketing is for. The director scores every job against this file. Agents never edit it.
-Replace each `{{fill: ...}}` with your answer. Lines starting with `> Example` are for a fictional shop, Harbor Lane Bikes; delete each one once your own answer is in. Agents ignore examples.
+Replace each placeholder (double curly braces starting with the word fill) with your answer. Lines starting with `> Example` are for a fictional shop, Harbor Lane Bikes; delete each one once your own answer is in. Agents ignore examples.
 
 ## 1. One sentence
 

@@ -1,7 +1,7 @@
 # Spend limits
 
 The money rules. Agents read this before proposing any spend and never edit it.
-Replace each `{{fill: ...}}` with your answer. Lines starting with `> Example` are for a fictional shop, Harbor Lane Bikes; delete each one once your own answer is in. Agents ignore examples.
+Replace each placeholder (double curly braces starting with the word fill) with your answer. Lines starting with `> Example` are for a fictional shop, Harbor Lane Bikes; delete each one once your own answer is in. Agents ignore examples.
 
 **Every spend waits for you, even inside these caps.** The caps decide whether an item is also marked `OVER LIMIT`; they never let an agent spend on its own.
 

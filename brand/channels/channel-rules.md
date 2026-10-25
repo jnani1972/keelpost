@@ -19,7 +19,7 @@ Last checked against platform help pages: {{fill: YYYY-MM-DD}}
 | email | newsletter | {{fill: e.g. 250 to 450 words}} | {{fill: ...}} | {{fill: ...}} | {{fill: ...}} |
 | instagram (example, Harbor Lane Bikes) | feed, reel | caption 60 to 120 words | none in caption | blank line between points | before-and-after repair photos |
 
-A channel left as `{{fill:` is not used: the writer and scheduler stop if a brief names it.
+A channel whose row is still unanswered is not used: the writer and scheduler stop if a brief names it.
 
 ## When a post takes off
 

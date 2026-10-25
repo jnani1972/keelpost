@@ -1,7 +1,7 @@
 # Approval rules
 
 Your rules for what ships on its own and what needs you. Agents read this before shipping anything and never edit it.
-Replace each `{{fill: ...}}` with your answer. Write "none" if you have nothing to add. Lines starting with `> Example` are for a fictional shop, Harbor Lane Bikes; delete each one once your own answer is in. Agents ignore examples.
+Replace each placeholder (double curly braces starting with the word fill) with your answer. Write "none" if you have nothing to add. Lines starting with `> Example` are for a fictional shop, Harbor Lane Bikes; delete each one once your own answer is in. Agents ignore examples.
 
 ## 1. May go out without me
 

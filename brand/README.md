@@ -8,7 +8,7 @@ Everything the agents need to know about your business, written down once so eve
    - In a table whose heading says **(open to suggestions)**, an agent may add a new row with status `suggested`. It never edits or deletes an existing row. You change `suggested` to a real status or delete the row.
    - In `brand/content/calendar.md`, the director and scheduler may add rows and set statuses exactly as that file's status table allows.
 2. **Settings win.** If a brand file disagrees with a file in `settings/`, the setting wins and the agent adds a pending item asking you to fix the conflict.
-3. **`{{fill:` means unknown.** An agent that needs a field still marked `{{fill: ...}}` stops and asks. It never guesses.
+3. **An unanswered placeholder means unknown.** An agent that needs a field still holding a fill placeholder stops and asks. It never guesses.
 4. **Examples are not facts.** Rows and lines marked as Harbor Lane Bikes examples are for a fictional shop. Delete them once your own rows are in. Agents ignore them.
 5. **Exports go in `data/`, not here.** Brand files hold rules and facts that change slowly. Weekly numbers live in `data/`.
 6. **No secrets.** No passwords, API keys, card numbers or private customer details in any file in this project.
