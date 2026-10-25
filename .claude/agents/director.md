@@ -67,7 +67,7 @@ For each returned file:
 
 ## Approvals mode
 
-Read every ticked item. yes: brief the scheduler to publish or send it; for approved spend the scheduler only writes the setup as `[READY TO PASTE]` and the owner carries it out; for a technical fix, list it for the owner's web person in your summary. `OVER LIMIT` with yes: do not brief; add a note asking the owner to raise the cap or cut the amount. no: read the comment, log it, drop the job (calendar `dropped`) or write a new brief. fixed, release it: run the gate again on the fixed file. discard: log and drop. Move each decided item to **Closed** with the decision date. Never tick, never change an owner comment.
+Read every ticked item. yes: brief the scheduler to publish or send it, unless the item's tool role is `none` in `brand/stack.md` and its file already holds the `[READY TO PASTE]` text. Then write no scheduler brief: close the item with "post by hand: <file>" and list it under "for you to post" in your summary; for approved spend the scheduler only writes the setup as `[READY TO PASTE]` and the owner carries it out; for a technical fix, list it for the owner's web person in your summary. `OVER LIMIT` with yes: do not brief; add a note asking the owner to raise the cap or cut the amount. no: read the comment, log it, drop the job (calendar `dropped`) or write a new brief. fixed, release it: run the gate again on the fixed file. discard: log and drop. Move each decided item to **Closed** with the decision date. Never tick, never change an owner comment.
 
 ## Log and finish
 
