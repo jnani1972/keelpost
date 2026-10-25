@@ -1,10 +1,20 @@
 # Notice
 
-Keelpost
-Copyright (c) 2026 jnani1972. All rights reserved.
+Required Notice: Copyright (c) 2026 jnani1972 (https://github.com/jnani1972/keelpost)
 
-No license is granted yet. Do not copy, share or resell these files until a license is added
-to this repository.
+Keelpost is licensed under the PolyForm Noncommercial License 1.0.0. The full terms are in
+`LICENSE.md` and at https://polyformproject.org/licenses/noncommercial/1.0.0.
+
+In short (the license text is what counts):
+- **Allowed:** personal use, study, research, hobby projects, and use by charities, schools,
+  public research groups and government bodies. You may change it and share it, as long as you
+  pass on the license and this notice.
+- **Not allowed:** any commercial use. That includes running it for a business's own marketing,
+  selling it, or using it to provide paid services. For commercial use, contact the copyright
+  holder through https://github.com/jnani1972 about a separate license.
+
+Keelpost is source-available, not open source: the open source definition does not allow a
+ban on commercial use.
 
 ## How it was made
 

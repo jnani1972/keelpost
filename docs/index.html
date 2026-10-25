@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Keelpost</title>
+<meta name="description" content="Keelpost is a crew of Claude Code agents that drafts a small business's marketing and ships only what the owner allows. A walkthrough of one demo week.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f6f3ee;
+  --surface: #ffffff;
+  --surface-2: #efe9df;
+  --ink: #1d2327;
+  --ink-2: #4a5359;
+  --ink-3: #6b747a;
+  --line: #ddd5c8;
+  --accent: #0f5c6e;
+  --accent-ink: #ffffff;
+  --accent-soft: #dcecef;
+  --ok: #2f6b3a;
+  --ok-soft: #e1efe3;
+  --wait: #8a5a00;
+  --wait-soft: #f6ead2;
+  --hold: #9b2f2f;
+  --hold-soft: #f6dfdc;
+  --code-bg: #1f2a30;
+  --code-ink: #e6edf0;
+  --shadow: 0 1px 2px rgba(29,35,39,.06), 0 8px 24px rgba(29,35,39,.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12171a;
+    --surface: #1a2125;
+    --surface-2: #222b30;
+    --ink: #e8ecee;
+    --ink-2: #b6bfc4;
+    --ink-3: #8e989e;
+    --line: #2f3a40;
+    --accent: #6cc1d2;
+    --accent-ink: #0b1a1e;
+    --accent-soft: #173238;
+    --ok: #8fd19c;
+    --ok-soft: #1b2e20;
+    --wait: #f0c26b;
+    --wait-soft: #33291a;
+    --hold: #f19a90;
+    --hold-soft: #3a2220;
+    --code-bg: #0d1214;
+    --code-ink: #dbe4e8;
+    --shadow: none;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12171a; --surface: #1a2125; --surface-2: #222b30; --ink: #e8ecee; --ink-2: #b6bfc4;
+  --ink-3: #8e989e; --line: #2f3a40; --accent: #6cc1d2; --accent-ink: #0b1a1e; --accent-soft: #173238;
+  --ok: #8fd19c; --ok-soft: #1b2e20; --wait: #f0c26b; --wait-soft: #33291a; --hold: #f19a90;
+  --hold-soft: #3a2220; --code-bg: #0d1214; --code-ink: #dbe4e8; --shadow: none;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font: 16px/1.6 Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+a { color: var(--accent); }
+.wrap { max-width: 980px; margin: 0 auto; padding: 0 16px; }
+header.hero { padding: 64px 0 40px; border-bottom: 1px solid var(--line); }
+.eyebrow { font: 500 13px/1 "JetBrains Mono", monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+h1, h2, h3 { font-family: Fraunces, Georgia, serif; line-height: 1.15; margin: 0; }
+h1 { font-size: clamp(40px, 7vw, 64px); margin: 12px 0 16px; }
+h2 { font-size: clamp(26px, 4vw, 34px); margin-bottom: 12px; }
+h3 { font-size: 20px; margin-bottom: 8px; }
+.lede { font-size: 19px; color: var(--ink-2); max-width: 680px; margin: 0; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+.chip { font-size: 13px; padding: 4px 10px; border-radius: 999px; background: var(--surface-2); color: var(--ink-2); border: 1px solid var(--line); }
+.cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.btn { display: inline-block; padding: 10px 16px; border-radius: 8px; font-weight: 600; text-decoration: none; border: 1px solid var(--line); color: var(--ink); background: var(--surface); }
+.btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+section { padding: 56px 0; border-bottom: 1px solid var(--line); }
+section > .wrap > p.intro { color: var(--ink-2); max-width: 700px; margin: 0 0 28px; }
+.cycle { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; counter-reset: s; }
+.cycle li { list-style: none; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 12px; box-shadow: var(--shadow); }
+.cycle li b { display: block; font-family: Fraunces, Georgia, serif; font-size: 18px; }
+.cycle li span { font-size: 13px; color: var(--ink-3); }
+.cycle li::before { counter-increment: s; content: counter(s); font: 500 12px "JetBrains Mono", monospace; color: var(--accent); }
+.cycle { padding: 0; margin: 0; }
+.crew { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 10px; margin-top: 24px; }
+.crew div { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+.crew code { font: 500 14px "JetBrains Mono", monospace; color: var(--accent); }
+.crew p { margin: 4px 0 0; font-size: 14px; color: var(--ink-2); }
+.note { background: var(--accent-soft); border-radius: 10px; padding: 12px 16px; font-size: 14px; color: var(--ink); margin: 0 0 28px; }
+.step { display: grid; grid-template-columns: 56px 1fr; gap: 16px; margin-bottom: 40px; }
+.step .num { width: 44px; height: 44px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); display: grid; place-items: center; font: 600 16px "JetBrains Mono", monospace; }
+.step .body { min-width: 0; }
+.step p { margin: 0 0 12px; color: var(--ink-2); }
+.cmd { font: 500 14px "JetBrains Mono", monospace; background: var(--surface-2); padding: 2px 6px; border-radius: 4px; color: var(--ink); }
+pre { margin: 0 0 12px; background: var(--code-bg); color: var(--code-ink); border-radius: 10px; padding: 14px 16px; overflow-x: auto; font: 13px/1.55 "JetBrains Mono", monospace; white-space: pre; }
+.file { font: 500 12px "JetBrains Mono", monospace; color: var(--ink-3); margin: 0 0 6px; }
+.table-scroll { overflow-x: auto; margin-bottom: 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { background: var(--surface-2); font-weight: 600; white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+td.n { text-align: right; font-family: "JetBrains Mono", monospace; }
+.tag { display: inline-block; font: 600 11px/1 "JetBrains Mono", monospace; padding: 4px 7px; border-radius: 4px; letter-spacing: .03em; }
+.tag.ok { background: var(--ok-soft); color: var(--ok); }
+.tag.wait { background: var(--wait-soft); color: var(--wait); }
+.tag.hold { background: var(--hold-soft); color: var(--hold); }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; margin-bottom: 12px; box-shadow: var(--shadow); }
+.card h4 { margin: 0 0 6px; font-size: 15px; }
+.card p { margin: 0; font-size: 14px; }
+blockquote.post { margin: 0 0 12px; background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 0 10px 10px 0; padding: 14px 18px; white-space: pre-line; font-size: 15px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+footer { padding: 40px 0 56px; color: var(--ink-3); font-size: 14px; }
+@media (max-width: 760px) {
+  .cycle { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: 1fr; }
+  .step { grid-template-columns: 1fr; gap: 8px; }
+  header.hero { padding-top: 40px; }
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">For Claude Code</div>
+    <h1>Keelpost</h1>
+    <p class="lede">A crew of ten Claude Code agents that plans a small business's week of marketing, drafts every post and reply, and ships only what the owner's written rules allow. Everything else waits in one file the owner ticks.</p>
+    <div class="chips">
+      <span class="chip">10 agents</span>
+      <span class="chip">10 commands</span>
+      <span class="chip">27 brand templates</span>
+      <span class="chip">plain Markdown, no code</span>
+      <span class="chip">noncommercial license</span>
+    </div>
+    <div class="cta">
+      <a class="btn primary" href="https://github.com/jnani1972/keelpost">View on GitHub</a>
+      <a class="btn" href="#demo">See a demo week</a>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>How it works</h2>
+    <p class="intro">Every rule, setting, brief, draft, approval and log line is a Markdown file in the project. The owner writes the settings once. Each week the owner drops tool exports into <span class="cmd">data/</span> and runs one command.</p>
+    <ol class="cycle">
+      <li><b>Gather</b><span>newest dated exports, calendar, posting slots</span></li>
+      <li><b>Rank</b><span>score jobs on urgency, fit, evidence</span></li>
+      <li><b>Brief</b><span>one brief per job, written by the director</span></li>
+      <li><b>Produce</b><span>specialists draft into <span class="cmd">work/</span></span></li>
+      <li><b>Schedule</b><span>only what passed every check</span></li>
+      <li><b>Approve</b><span>the owner ticks the rest</span></li>
+    </ol>
+    <div class="crew">
+      <div><code>director</code><p>Ranks the week, writes briefs, applies the approval gate. Never drafts or posts.</p></div>
+      <div><code>writer</code><p>Drafts posts, articles and emails from project facts only.</p></div>
+      <div><code>designer</code><p>Plans visuals and video, checks them against your specs.</p></div>
+      <div><code>scheduler</code><p>The only agent that books posts, and only approved ones.</p></div>
+      <div><code>reputation</code><p>Drafts review replies. Negative ones always wait.</p></div>
+      <div><code>inbox</code><p>Answers messages with approved words, records leads.</p></div>
+      <div><code>search-watch</code><p>Rankings, queries and crawl problems, with actions.</p></div>
+      <div><code>rival-watch</code><p>Competitor moves and promotions, look-only.</p></div>
+      <div><code>analyst</code><p>KPIs, cost per result, spend against caps.</p></div>
+      <div><code>setup-check</code><p>Finds missing files and unanswered settings.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>The rules it cannot break</h2>
+    <p class="intro">Settings can add to this list. Nothing can remove from it. These always go to <span class="cmd">approvals/pending.md</span>:</p>
+    <div class="grid-3">
+      <div class="card"><h4>Money</h4><p>Any ad, boost, paid placement or budget change. Spend past a cap is marked <span class="cmd">OVER LIMIT</span> and never ships.</p></div>
+      <div class="card"><h4>People</h4><p>Replies to unhappy reviewers, anything naming a real person, and any message to someone who never wrote first.</p></div>
+      <div class="card"><h4>Facts</h4><p>Anything with a <span class="cmd">[CHECK]</span> marker: a fact that can't be traced to a project file. Prices, offers and dates too.</p></div>
+    </div>
+    <p style="color:var(--ink-2);font-size:14px;margin:12px 0 0">One empty file, <span class="cmd">settings/PAUSE</span>, stops every agent until the owner deletes it.</p>
+  </div>
+</section>
+
+<section id="demo">
+  <div class="wrap">
+    <h2>A demo week</h2>
+    <p class="note"><b>Fictional data.</b> The shop, Harbor Lane Bikes, and the review below are made up for this demo. Every excerpt on this page is real output from the Keelpost agents, trimmed where marked with &hellip;</p>
+
+    <div class="step">
+      <div class="num">1</div>
+      <div class="body">
+        <h3>Check the install</h3>
+        <p>The owner fills the four settings files and the starter brand files, then runs <span class="cmd">/setup-check</span>. It found no missing files and no broken agents. It also followed every link and caught two that pointed nowhere: a proof row citing a file that doesn't exist, and a pillar citing a proof id that doesn't exist.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">2</div>
+      <div class="body">
+        <h3>The director ranks the week</h3>
+        <p>Input: three ready calendar rows and one export, a 5-star review. <span class="cmd">/weekly-run</span> scored every candidate job. Job 5 was dropped: there was no usable slot, and no written consent to quote the reviewer.</p>
+        <p class="file">work/briefs/2026-10-26-director-week-plan.md</p>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>#</th><th>job</th><th>urgency</th><th>fit</th><th>evidence</th><th>total</th></tr></thead>
+            <tbody>
+              <tr><td class="n">1</td><td>Thank-you reply to the 5-star Google review</td><td class="n">3</td><td class="n">2</td><td class="n">3</td><td class="n">8</td></tr>
+              <tr><td class="n">2</td><td>C-001 instagram, squeaky brakes: the five-minute fix</td><td class="n">3</td><td class="n">3</td><td class="n">2</td><td class="n">8</td></tr>
+              <tr><td class="n">3</td><td>C-002 instagram, lights check before the clocks go back</td><td class="n">3</td><td class="n">3</td><td class="n">1</td><td class="n">7</td></tr>
+              <tr><td class="n">4</td><td>C-003 instagram, winter tune-up checklist</td><td class="n">1</td><td class="n">3</td><td class="n">1</td><td class="n">5</td></tr>
+              <tr><td class="n">5</td><td>Workshop-story post built on the review</td><td class="n">0</td><td class="n">2</td><td class="n">1</td><td class="n">3</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">3</div>
+      <div class="body">
+        <h3>One brief per job</h3>
+        <p>Each brief says why now, what to make, which files to read and what to hand back. Specialists only ever work from a brief.</p>
+        <p class="file">work/briefs/2026-10-26-writer-squeaky-brakes-five-minute-fix.md</p>
+<pre>id: B-20261026-02
+agent: writer
+kind: weekly
+channel: instagram
+topic: squeaky brakes, the five-minute fix
+outcome: workshop visits for brake checks (calendar C-001 aim)
+due: 2026-10-27
+score: {urgency: 3, fit: 3, evidence: 2, total: 8}
+gate: auto</pre>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">4</div>
+      <div class="body">
+        <h3>The writer drafts, citing every fact</h3>
+        <p>The writer wrote three opening lines, picked one, and listed the source file behind each claim. The voice check passed.</p>
+        <p class="file">work/2026-10-26-instagram-squeaky-brakes-five-minute-fix.md</p>
+        <blockquote class="post">Squeaky brakes don't mean you need a new bike.
+That squeal is your bike asking for a look.
+Five minutes on the stand usually sorts it.
+We fix it right, then tell you what we did.
+A well-kept bike is a safer bike.
+Don't learn to live with the noise on your commute.
+Book a service, and we'll take a look in the workshop.</blockquote>
+<pre>voice: pass
+sources: [brand/content/calendar.md#C-001, settings/voice.md#9,
+          settings/strategy.md#4, brand/identity/positioning.md, &hellip;]</pre>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">5</div>
+      <div class="body">
+        <h3>The gate holds what isn't proven</h3>
+        <p>Nothing shipped this week. The demo brand files had no real proof rows, so the director held every post and wrote down why. A missing brand font failed the visual's spec check.</p>
+        <div class="card">
+          <h4><span class="tag wait">WAITS</span> A-20261026-02 &middot; C-001 squeaky brakes, Wed 07:30</h4>
+          <p>The only source for &ldquo;Five minutes on the stand usually sorts it.&rdquo; is a sample line in <span class="cmd">settings/voice.md</span>. That is a style example, not a proof row. The on-image text also drops &ldquo;usually&rdquo;, which makes the claim stronger than the owner's line.</p>
+        </div>
+        <div class="card">
+          <h4><span class="tag wait">WAITS</span> A-20261026-03 &middot; C-002 lights check, Sat 07:30</h4>
+          <p>No file backs the three light checks. The subject says &ldquo;before the clocks go back&rdquo;, but UK clocks already changed on 10-25.</p>
+        </div>
+        <div class="card">
+          <h4><span class="tag hold">HELD</span> V-20261026-01 &middot; C-001 visual</h4>
+          <p>Spec check failed: the fonts table in <span class="cmd">brand/visuals/specs.md</span> is empty. A brakes photo is marked <span class="cmd">[OWNER PICKS]</span>.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">6</div>
+      <div class="body">
+        <h3>The owner ticks, the director closes</h3>
+        <p>The owner ticked <b>yes</b> on the thank-you reply and asked the director to process approvals. The item moved to Closed with the tick and comment untouched. No review tool was connected, so the reply stays ready to paste.</p>
+        <p class="file">work/2026-10-26-reviews-google-five-star-thanks.md</p>
+        <blockquote class="post">Thanks for the kind words. We're glad the brakes feel brand new. That's what we like to hear in the workshop. Bring it back whenever it's due a tune-up.</blockquote>
+        <div class="card">
+          <h4><span class="tag ok">CLOSED</span> A-20261026-01 &middot; Thank-you reply to 5-star Google review &middot; decided 2026-10-26</h4>
+          <p>Owner comment: &ldquo;Looks good. Posting it by hand today.&rdquo;</p>
+        </div>
+        <p class="file">logs/actions.md</p>
+<pre>2026-10-26 00:34 | director | decision A-20261026-01: yes (owner comment: &hellip;);
+                   spend none, so no cap check needed; item moved to Closed | approvals/pending.md
+2026-10-26 00:34 | director | review-log row left at suggested; only the owner sets it
+                   to done once the reply is live | brand/reputation/review-process.md</pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Install</h2>
+    <p class="intro">You need <a href="https://claude.com/claude-code">Claude Code</a>. Nothing else to install. REA, for competitor page checks, is optional and starts through <span class="cmd">npx</span>.</p>
+<pre>git clone https://github.com/jnani1972/keelpost.git
+cd keelpost
+claude
+
+/setup-check      # what's missing or unanswered
+/weekly-run       # plan, brief, draft, gate</pre>
+    <p style="color:var(--ink-2);margin:0">Fill <span class="cmd">settings/</span> first: agents refuse to start while any answer is still a placeholder. Then tick <span class="cmd">approvals/pending.md</span> and ask: &ldquo;Use the director agent to process approvals.&rdquo;</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>License</h2>
+    <p class="intro" style="margin-bottom:12px">Keelpost is source-available under the <a href="https://polyformproject.org/licenses/noncommercial/1.0.0">PolyForm Noncommercial License 1.0.0</a>. Free for personal use, study, research, and noncommercial organisations such as charities and schools. Commercial use, including running it for a business, needs a separate license from the copyright holder. The license text in <a href="https://github.com/jnani1972/keelpost/blob/main/LICENSE.md">LICENSE.md</a> is what counts.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Copyright &copy; 2026 jnani1972. &ldquo;Keelpost&rdquo; is a working name. Harbor Lane Bikes is fictional.</div>
+</footer>
+
+</body>
+</html>

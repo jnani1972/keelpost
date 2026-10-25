@@ -47,6 +47,9 @@ On macOS or Linux, change the entry to `"command": "npx", "args": ["-y", "rea-ag
 
 Before using it, start a separate Chrome profile that is signed in to nothing, with `--remote-debugging-port=9222`. REA is only for public pages: no logins, no scripts, no code. If REA is not running, rival-watch logs that and carries on without it.
 
-## Credits and license
+## License
 
-See `NOTICE.md`.
+Free for noncommercial use under the PolyForm Noncommercial License 1.0.0 (`LICENSE.md`).
+Commercial use, including running it for a business, needs a separate license. See `NOTICE.md`.
+
+A walkthrough of a demo week is at https://jnani1972.github.io/keelpost/.
