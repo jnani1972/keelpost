@@ -49,7 +49,7 @@ logs/actions.md           one line per action, append-only
    - any reply to a negative review or a complaint
    - anything naming a real person, customer or partner
    - anything mentioning a price, discount, offer, giveaway or delivery date
-   - anything not on the content calendar (`brand/content/calendar.md`)
+   - any post, article or email that is not on the content calendar (`brand/content/calendar.md`). Review replies and inbox answers are not calendar items; their own rules below and in `settings/approvals.md` decide them
    - anything still carrying a `[CHECK]` marker
    - anything that reacts to a competitor
    - any outbound message to someone who never contacted the brand
@@ -73,7 +73,8 @@ Events (the event commands) run the same stages for one job and go before weekly
 
 - All work starts as a brief from the director and returns to the director.
 - Specialists never hand work to each other. If a specialist finds work for another agent, it says so in what it returns, and the director writes the brief.
-- Agents do not call other agents. The director lists hand-offs; the main session runs them one at a time, in order: "Use the <agent> agent on work/briefs/<file>".
+- Agents do not call other agents. The director lists hand-offs; the main session runs them one at a time, in order: "Use the <agent> agent on work/briefs/<file>. Run time: YYYY-MM-DD HH:MM".
+- **Run time.** Agents cannot read a clock. At the start of every command or session, the main session runs `date "+%Y-%m-%d %H:%M"` once and adds `Run time: <result>` to every hand-off prompt, refreshing it before each hand-off. Agents use that value for log lines and file dates. With no run time given, an agent writes the date from its prompt and `--:--` for the time, never an estimate.
 - After each hand-off returns, the main session gives the return to the director.
 
 ## 6. Who writes where
@@ -109,7 +110,7 @@ Events (the event commands) run the same stages for one job and go before weekly
 YYYY-MM-DD HH:MM | <agent> | <what happened> | <file or ->
 ```
 
-`<agent>` is the agent name, or `/<command>` when the main session acts for a command.
+`<agent>` is the agent name, or `/<command>` when the main session acts for a command. The time is the run time from the hand-off prompt (section 5), never a guess.
 
 ## 8. Facts and markers
 

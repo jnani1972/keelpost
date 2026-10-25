@@ -25,7 +25,7 @@ These are fixed in `CLAUDE.md` and cannot be removed here:
 - any reply to a negative review or a complaint
 - anything naming a real person, customer or partner
 - anything mentioning a price, discount, offer, giveaway or delivery date
-- anything not on the content calendar
+- any post, article or email not on the content calendar (review replies and inbox answers follow their own rules)
 - anything still carrying a `[CHECK]` marker
 - anything that reacts to a competitor
 - any outbound message to someone who never contacted the brand
